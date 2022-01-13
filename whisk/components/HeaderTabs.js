@@ -29,17 +29,18 @@ const HeaderButton = (props) => (
     style={
       (styles.header,
       {
-        backgroundColor: props.buttonColour,
+        backgroundColor: props.activeTab === props.text ? '#0c1527' : '#eef6ff',
         paddingVertical: 6,
         paddingHorizontal: 16,
         borderRadius: 30,
       })
     }
+    // change active tab based on text of pressed button
     onPress={() => props.setActiveTab(props.text)}
   >
     <Text
       style={{
-        color: props.textColour,
+        color: props.activeTab === props.text ? '#eef6ff' : '#0c1527',
         fontSize: 15,
         fontWeight: '900',
       }}
