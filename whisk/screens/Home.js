@@ -6,6 +6,7 @@ import RestaurantCard from '../components/RestaurantCard'
 import SearchBar from '../components/SearchBar'
 import axios from 'axios'
 import { YELP_API_KEY } from '../Environment'
+import { Divider } from 'react-native-elements'
 
 export default function Home() {
   const [restaurantData, setRestaurantData] = useState([])
@@ -48,6 +49,7 @@ export default function Home() {
         <Categories />
         <RestaurantCard restaurantData={restaurantData} />
       </ScrollView>
+      <Divider width={1} />
     </SafeAreaView>
   )
 }
