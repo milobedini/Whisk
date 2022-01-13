@@ -7,6 +7,7 @@ import SearchBar from '../components/SearchBar'
 import axios from 'axios'
 import { YELP_API_KEY } from '../Environment'
 import { Divider } from 'react-native-elements'
+import FooterTabs from '../components/FooterTabs'
 
 export default function Home() {
   const [restaurantData, setRestaurantData] = useState([])
@@ -47,9 +48,11 @@ export default function Home() {
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Categories />
+        <Divider width={1} />
         <RestaurantCard restaurantData={restaurantData} />
       </ScrollView>
       <Divider width={1} />
+      <FooterTabs />
     </SafeAreaView>
   )
 }
