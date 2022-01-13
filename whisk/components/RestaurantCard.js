@@ -33,7 +33,7 @@ export const localRestaurants = [
   },
 ]
 
-export default function RestaurantCard() {
+export default function RestaurantCard({ restaurantData }) {
   return (
     <TouchableOpacity
       activeOpacity={1}
@@ -41,7 +41,7 @@ export default function RestaurantCard() {
         marginBottom: 30,
       }}
     >
-      {localRestaurants.map((restaurant, index) => (
+      {restaurantData.map((restaurant, index) => (
         <View
           key={index}
           style={{
