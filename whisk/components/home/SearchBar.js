@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text } from 'react-native'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 import { Ionicons, AntDesign } from 'react-native-vector-icons'
-import { GOOGLE_API } from '../Environment'
+import { GOOGLE_API } from '../../Environment'
 
 export default function SearchBar({ setCity }) {
   return (

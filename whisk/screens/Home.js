@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, SafeAreaView, StyleSheet, ScrollView } from 'react-native'
-import Categories from '../components/Categories'
-import HeaderTabs from '../components/HeaderTabs'
-import RestaurantCard from '../components/RestaurantCard'
-import SearchBar from '../components/SearchBar'
+import Categories from '../components/home/Categories'
+import HeaderTabs from '../components/home/HeaderTabs'
+import RestaurantCard from '../components/home/RestaurantCard'
+import SearchBar from '../components/home/SearchBar'
 import axios from 'axios'
 import { YELP_API_KEY } from '../Environment'
 import { Divider } from 'react-native-elements'
-import FooterTabs from '../components/FooterTabs'
+import FooterTabs from '../components/home/FooterTabs'
 
 export default function Home() {
   const [restaurantData, setRestaurantData] = useState([])
