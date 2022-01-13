@@ -1,7 +1,8 @@
 import React from 'react'
-import { View, Text, SafeAreaView, StyleSheet } from 'react-native'
+import { View, Text, SafeAreaView, StyleSheet, ScrollView } from 'react-native'
 import Categories from '../components/Categories'
 import HeaderTabs from '../components/HeaderTabs'
+import RestaurantCard from '../components/RestaurantCard'
 import SearchBar from '../components/SearchBar'
 
 export default function Home() {
@@ -11,7 +12,10 @@ export default function Home() {
         <HeaderTabs />
         <SearchBar />
       </View>
-      <Categories />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Categories />
+        <RestaurantCard />
+      </ScrollView>
     </SafeAreaView>
   )
 }
