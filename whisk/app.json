@@ -1,12 +1,13 @@
 {
   "expo": {
-    "name": "whisk",
+    "name": "Whisk",
     "slug": "whisk",
+    "description": "React Native app that uses Redux and Firebase, and consumes the Google Places and Yelp APIs.",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/whisk.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/images/whisk.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -26,7 +27,7 @@
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/images/whisk.png"
     }
   }
 }

@@ -1,16 +1,8 @@
 import React from 'react'
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { MaterialCommunityIcons } from 'react-native-vector-icons'
 
-const yelpRestaurantDetail = {
-  name: 'Five Guys',
-  image: 'image',
-  price: '££',
-  reviews: 1500,
-  rating: 4.7,
-  categories: [{ title: 'Burger' }, { title: 'Fast Food' }],
-}
-
-export default function About({ route }) {
+export default function About({ route, navigation }) {
   const { name, image, price, reviews, rating, categories } = route.params
 
   const formattedCategories = categories
@@ -25,21 +17,38 @@ export default function About({ route }) {
 
   return (
     <View>
-      <RestaurantImage image={image} />
+      <RestaurantImage image={image} navigation={navigation} />
       <RestaurantName name={name} />
       <RestaurantDescription description={description} />
     </View>
   )
 }
 
-const RestaurantImage = ({ image }) => (
-  <Image
-    source={{ uri: image }}
+const RestaurantImage = ({ image, navigation }) => (
+  <View
     style={{
-      width: '100%',
-      height: 180,
+      position: 'relative',
     }}
-  />
+  >
+    <Image
+      source={{ uri: image }}
+      style={{
+        width: '100%',
+        height: 180,
+      }}
+    ></Image>
+    <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+      <MaterialCommunityIcons
+        name="backburger"
+        color="#18cdba"
+        size={40}
+        style={{
+          position: 'absolute',
+          bottom: 0,
+        }}
+      />
+    </TouchableOpacity>
+  </View>
 )
 
 const RestaurantName = ({ name }) => (

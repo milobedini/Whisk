@@ -53,7 +53,7 @@ const foods = [
 export default function RestaurantShow({ route, navigation }) {
   return (
     <View style={{ backgroundColor: '#0c1527', flex: 1 }}>
-      <About route={route} />
+      <About route={route} navigation={navigation} />
       <Divider
         width={2}
         color="#18cdba"
