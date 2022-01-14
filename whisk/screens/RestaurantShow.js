@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text } from 'react-native'
 import { Divider } from 'react-native-elements'
 import About from '../components/restaurantShow/About'
+import Cart from '../components/restaurantShow/Cart'
 import MenuItem from '../components/restaurantShow/MenuItem'
 
 const foods = [
@@ -49,7 +50,7 @@ const foods = [
   },
 ]
 
-export default function RestaurantShow({ route }) {
+export default function RestaurantShow({ route, navigation }) {
   return (
     <View style={{ backgroundColor: '#0c1527', flex: 1 }}>
       <About route={route} />
@@ -61,6 +62,7 @@ export default function RestaurantShow({ route }) {
         }}
       />
       <MenuItem restaurantName={route.params.name} foods={foods} />
+      <Cart navigation={navigation} restaurantName={route.params.name} />
     </View>
   )
 }
