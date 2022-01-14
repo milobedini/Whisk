@@ -10,9 +10,8 @@ const yelpRestaurantDetail = {
   categories: [{ title: 'Burger' }, { title: 'Fast Food' }],
 }
 
-export default function About() {
-  const { name, image, price, reviews, rating, categories } =
-    yelpRestaurantDetail
+export default function About({ route }) {
+  const { name, image, price, reviews, rating, categories } = route.params
 
   const formattedCategories = categories
     .map((category) => category.title)

@@ -9,7 +9,7 @@ import { YELP_API_KEY } from '../Environment'
 import { Divider } from 'react-native-elements'
 import FooterTabs from '../components/home/FooterTabs'
 
-export default function Home() {
+export default function Home({ navigation }) {
   const [restaurantData, setRestaurantData] = useState([])
   const [city, setCity] = useState('London')
   const [activeTab, setActiveTab] = useState('All')
@@ -49,7 +49,10 @@ export default function Home() {
       <ScrollView showsVerticalScrollIndicator={false}>
         <Categories />
         <Divider width={1} />
-        <RestaurantCard restaurantData={restaurantData} />
+        <RestaurantCard
+          restaurantData={restaurantData}
+          navigation={navigation}
+        />
       </ScrollView>
       <Divider width={1} />
       <FooterTabs />

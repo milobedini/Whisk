@@ -3,29 +3,44 @@ import { View, Text, Image } from 'react-native'
 import { TouchableOpacity } from 'react-native'
 import { MaterialCommunityIcons } from 'react-native-vector-icons'
 
-export default function RestaurantCard({ restaurantData }) {
+export default function RestaurantCard({ restaurantData, navigation }) {
   return (
-    <TouchableOpacity
-      activeOpacity={1}
-      style={{
-        marginBottom: 30,
-      }}
-    >
+    <>
       {restaurantData.map((restaurant, index) => (
-        <View
+        <TouchableOpacity
           key={index}
-          style={{
-            marginTop: 10,
-            padding: 8,
-            // borderBottomWidth: 1,
-            // borderBottomColor: 'white',
-          }}
+          activeOpacity={1}
+          onPress={() =>
+            navigation.navigate('RestaurantShow', {
+              // this is all part of the route
+              name: restaurant.name,
+              image: restaurant.image_url,
+              price: restaurant.price,
+              reviews: restaurant.review_count,
+              rating: restaurant.rating,
+              categories: restaurant.categories,
+            })
+          }
+          style={
+            {
+              // marginBottom: 30,
+            }
+          }
         >
-          <RestaurantImage image={restaurant.image_url} />
-          <RestaurantInfo name={restaurant.name} rating={restaurant.rating} />
-        </View>
+          <View
+            style={{
+              marginTop: 10,
+              padding: 8,
+              // borderBottomWidth: 1,
+              // borderBottomColor: 'white',
+            }}
+          >
+            <RestaurantImage image={restaurant.image_url} />
+            <RestaurantInfo name={restaurant.name} rating={restaurant.rating} />
+          </View>
+        </TouchableOpacity>
       ))}
-    </TouchableOpacity>
+    </>
   )
 }
 
