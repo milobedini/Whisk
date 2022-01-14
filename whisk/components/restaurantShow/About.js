@@ -1,23 +1,41 @@
 import React from 'react'
 import { View, Text, Image } from 'react-native'
 
-const image = require('../../assets/images/rest.jpg')
-const title = 'Five Guys'
-const description = 'Burgers • American • Fast Food • ££ • 4 Stars (1,213)'
+const yelpRestaurantDetail = {
+  name: 'Five Guys',
+  image: 'image',
+  price: '££',
+  reviews: 1500,
+  rating: 4.7,
+  categories: [{ title: 'Burger' }, { title: 'Fast Food' }],
+}
 
 export default function About() {
+  const { name, image, price, reviews, rating, categories } =
+    yelpRestaurantDetail
+
+  const formattedCategories = categories
+    .map((category) => category.title)
+    .join(' | ')
+
+  const star = '⭐️'
+
+  const description = `${formattedCategories} ${
+    price ? ` | ${price}` : ''
+  } | ${rating}* ${star.repeat(rating.toFixed(0))}(${reviews})`
+
   return (
     <View>
       <RestaurantImage image={image} />
-      <RestaurantTitle title={title} />
-      <RestaurantDescription text={description} />
+      <RestaurantName name={name} />
+      <RestaurantDescription description={description} />
     </View>
   )
 }
 
 const RestaurantImage = ({ image }) => (
   <Image
-    source={image}
+    source={{ uri: image }}
     style={{
       width: '100%',
       height: 180,
@@ -25,7 +43,7 @@ const RestaurantImage = ({ image }) => (
   />
 )
 
-const RestaurantTitle = ({ title }) => (
+const RestaurantName = ({ name }) => (
   <Text
     style={{
       color: '#18cdba',
@@ -35,11 +53,11 @@ const RestaurantTitle = ({ title }) => (
       marginHorizontal: 15,
     }}
   >
-    {title}
+    {name}
   </Text>
 )
 
-const RestaurantDescription = ({ text }) => (
+const RestaurantDescription = ({ description }) => (
   <Text
     style={{
       color: '#eef6ff',
@@ -47,8 +65,9 @@ const RestaurantDescription = ({ text }) => (
       marginHorizontal: 15,
       fontWeight: '400',
       fontSize: 16,
+      lineHeight: 30,
     }}
   >
-    {text}
+    {description}
   </Text>
 )
