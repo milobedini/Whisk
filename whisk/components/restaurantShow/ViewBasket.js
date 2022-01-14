@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 
-export default function Cart({}) {
+export default function ViewBasket({}) {
   return (
     <View
       style={{
@@ -38,7 +38,7 @@ export default function Cart({}) {
               fontSize: 20,
             }}
           >
-            Checkout
+            View Basket
           </Text>
         </TouchableOpacity>
       </View>

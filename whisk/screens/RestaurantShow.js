@@ -2,13 +2,13 @@ import React from 'react'
 import { View, Text } from 'react-native'
 import { Divider } from 'react-native-elements'
 import About from '../components/restaurantShow/About'
-import Cart from '../components/restaurantShow/Cart'
 import MenuItem from '../components/restaurantShow/MenuItem'
+import ViewBasket from '../components/restaurantShow/ViewBasket'
 
 const foods = [
   {
-    title: 'Burger',
-    description: 'That is a tasty burger',
+    title: 'Royale with Cheese',
+    description: 'That is a tasty burger.',
     price: '£12.99',
     image:
       'https://cdn-b.william-reed.com/var/wrbm_gb_hospitality/storage/images/publications/hospitality/bighospitality.co.uk/article/2019/09/20/how-five-guys-conquered-the-uk-burger-market/3169189-1-eng-GB/How-Five-Guys-conquered-the-UK-burger-market.jpg',
@@ -62,7 +62,7 @@ export default function RestaurantShow({ route, navigation }) {
         }}
       />
       <MenuItem restaurantName={route.params.name} foods={foods} />
-      <Cart navigation={navigation} restaurantName={route.params.name} />
+      <ViewBasket navigation={navigation} restaurantName={route.params.name} />
     </View>
   )
 }

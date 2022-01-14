@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     fontSize: 19,
     fontWeight: '600',
     color: '#eef6ff',
+    maxWidth: 220,
   },
 })
 
@@ -59,13 +60,14 @@ const FoodInfo = ({ food }) => (
   <View
     style={{
       width: 240,
-      justifyContent: 'space-evenly',
+      justifyContent: 'space-around',
     }}
   >
     <Text style={styles.titleStyle}>{food.title}</Text>
     <Text
       style={{
         color: '#eef6ff',
+        maxWidth: 200,
       }}
     >
       {food.description}
@@ -86,6 +88,7 @@ const FoodImage = ({ food }) => (
       source={{ uri: food.image }}
       style={{
         width: 100,
+
         height: 100,
         borderRadius: 8,
       }}
