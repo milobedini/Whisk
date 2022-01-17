@@ -8,9 +8,11 @@ import {
   Image,
 } from 'react-native'
 import { useSelector } from 'react-redux'
+import { db } from '../../firebase'
 import OrderItem from './OrderItem'
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 
-export default function ViewBasket({ route }) {
+export default function ViewBasket({ route, navigation }) {
   const [modalVisible, setModalVisible] = useState(false)
   const { image } = route.params
 
@@ -25,6 +27,16 @@ export default function ViewBasket({ route }) {
     style: 'currency',
     currency: 'GBP',
   })
+
+  const addOrderToFirebase = () => {
+    const docRef = addDoc(collection(db, 'orders'), {
+      items: items,
+      restaurantName: restaurantName,
+      created: serverTimestamp(),
+    })
+    setModalVisible(false)
+    navigation.navigate('OrderCompleted')
+  }
 
   const styles = StyleSheet.create({
     modalContainer: {
@@ -102,9 +114,20 @@ export default function ViewBasket({ route }) {
                   width: 300,
                   position: 'relative',
                 }}
-                onPress={() => setModalVisible(false)}
+                onPress={() => {
+                  addOrderToFirebase()
+                  setModalVisible(false)
+                }}
               >
                 <Text style={{ color: '#18cdba', fontSize: 20 }}>Checkout</Text>
+                <Text
+                  style={{
+                    color: '#18cdba',
+                    fontSize: 15,
+                  }}
+                >
+                  {total ? textTotal : ''}
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
