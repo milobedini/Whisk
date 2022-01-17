@@ -62,7 +62,11 @@ export default function RestaurantShow({ route, navigation }) {
         }}
       />
       <MenuItem restaurantName={route.params.name} foods={foods} />
-      <ViewBasket navigation={navigation} restaurantName={route.params.name} />
+      <ViewBasket
+        navigation={navigation}
+        restaurantName={route.params.name}
+        route={route}
+      />
     </View>
   )
 }
