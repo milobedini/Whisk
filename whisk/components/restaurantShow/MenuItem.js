@@ -37,7 +37,9 @@ export default function MenuItem({
               <BouncyCheckbox
                 fillColor="#18cdba"
                 unfillColor="#eef6ff"
-                onPress={(checkboxValue) => selectItem(food, checkboxValue)}
+                onPress={(checkboxValue) => {
+                  selectItem(food, checkboxValue)
+                }}
                 isChecked={isItemInBasket(food, basketItems)}
               />
             )}

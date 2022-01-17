@@ -8,6 +8,7 @@ let basketReducer = (state = defaultState, action) => {
       let newState = { ...state }
       if (action.payload.checkboxValue) {
         console.log('Added to cart')
+
         newState.selectedItems = {
           items: [...newState.selectedItems.items, action.payload],
           restaurantName: action.payload.restaurantName,
@@ -24,6 +25,10 @@ let basketReducer = (state = defaultState, action) => {
         }
       }
       return newState
+    }
+    case 'EMPTY_BASKET': {
+      console.log('Basket emptied')
+      return defaultState
     }
     default:
       return state

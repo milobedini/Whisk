@@ -1,24 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, SafeAreaView, ScrollView } from 'react-native'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import LottieView from 'lottie-react-native'
 import MenuItem from '../components/restaurantShow/MenuItem'
 import { db } from '../firebase'
-import {
-  collection,
-  getDoc,
-  getDocs,
-  limit,
-  limitToLast,
-  onSnapshot,
-  orderBy,
-  query,
-} from 'firebase/firestore'
+import { Ionicons } from 'react-native-vector-icons'
+import { collection, getDocs, limit, orderBy, query } from 'firebase/firestore'
+import { TouchableOpacity } from 'react-native'
 
-export default function OrderCompleted() {
+export default function OrderCompleted({ navigation }) {
   const { items, restaurantName } = useSelector(
     (state) => state.basketReducer.selectedItems
   )
+  const dispatch = useDispatch()
+  const emptyBasket = () => dispatch({ type: 'EMPTY_BASKET' })
   const [lastOrder, setLastOrder] = useState({})
   const total = items
     .map((item) => Number(item.price.replace('£', '')))
@@ -37,7 +32,6 @@ export default function OrderCompleted() {
         limit(1)
       )
       const querySnapshot = await getDocs(q)
-      querySnapshot.forEach((doc) => {})
       querySnapshot.docs.map((doc) => {
         setLastOrder(doc.data().items)
       })
@@ -83,6 +77,18 @@ export default function OrderCompleted() {
           {lastOrder.length > 0 ? (
             <MenuItem foods={lastOrder} hideCheckbox={true} />
           ) : null}
+          <TouchableOpacity
+            style={{
+              alignItems: 'center',
+              marginTop: 12,
+            }}
+            onPress={() => {
+              emptyBasket()
+              navigation.navigate('Home')
+            }}
+          >
+            <Ionicons name="md-home" size={40} color="#18cdba" />
+          </TouchableOpacity>
         </ScrollView>
 
         <LottieView
