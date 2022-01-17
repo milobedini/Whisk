@@ -186,7 +186,7 @@ export default function ViewBasket({ route, navigation }) {
                   marginRight: 30,
                 }}
               >
-                View Basket
+                View Basket ({items.length})
               </Text>
               <Text
                 style={{

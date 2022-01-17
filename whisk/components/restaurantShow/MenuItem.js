@@ -4,24 +4,12 @@ import { Divider } from 'react-native-elements'
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
 import { useDispatch, useSelector } from 'react-redux'
 
-// const foods = [
-//   {
-//     title: 'Burger',
-//     description: 'That is a tasty burger',
-//     price: '£12.99',
-//     image:
-//       'https://cdn-b.william-reed.com/var/wrbm_gb_hospitality/storage/images/publications/hospitality/bighospitality.co.uk/article/2019/09/20/how-five-guys-conquered-the-uk-burger-market/3169189-1-eng-GB/How-Five-Guys-conquered-the-UK-burger-market.jpg',
-//   },
-//   {
-//     title: 'Burger',
-//     description: 'That is a tasty burger',
-//     price: '£12.99',
-//     image:
-//       'https://cdn-b.william-reed.com/var/wrbm_gb_hospitality/storage/images/publications/hospitality/bighospitality.co.uk/article/2019/09/20/how-five-guys-conquered-the-uk-burger-market/3169189-1-eng-GB/How-Five-Guys-conquered-the-UK-burger-market.jpg',
-//   },
-// ]
-
-export default function MenuItem({ foods, restaurantName }) {
+export default function MenuItem({
+  foods,
+  restaurantName,
+  hideCheckbox,
+  marginLeft,
+}) {
   const dispatch = useDispatch()
   const selectItem = (item, checkboxValue) =>
     dispatch({
@@ -45,14 +33,16 @@ export default function MenuItem({ foods, restaurantName }) {
       {foods.map((food, index) => (
         <View key={index}>
           <View style={styles.menuItemStyle}>
-            <BouncyCheckbox
-              fillColor="#18cdba"
-              unfillColor="#eef6ff"
-              onPress={(checkboxValue) => selectItem(food, checkboxValue)}
-              isChecked={isItemInBasket(food, basketItems)}
-            />
+            {hideCheckbox ? null : (
+              <BouncyCheckbox
+                fillColor="#18cdba"
+                unfillColor="#eef6ff"
+                onPress={(checkboxValue) => selectItem(food, checkboxValue)}
+                isChecked={isItemInBasket(food, basketItems)}
+              />
+            )}
             <FoodInfo food={food} />
-            <FoodImage food={food} />
+            <FoodImage food={food} marginLeft={marginLeft ? marginLeft : 0} />
           </View>
           <Divider
             width={0.3}
@@ -106,13 +96,13 @@ const FoodInfo = ({ food }) => (
   </View>
 )
 
-const FoodImage = ({ food }) => (
+const FoodImage = ({ food, marginLeft }) => (
   <View>
     <Image
       source={{ uri: food.image }}
       style={{
         width: 100,
-
+        marginLeft: marginLeft,
         height: 100,
         borderRadius: 8,
       }}
