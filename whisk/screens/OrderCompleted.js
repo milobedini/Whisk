@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, SafeAreaView } from 'react-native'
+import { View, Text, SafeAreaView, ScrollView } from 'react-native'
 import { useSelector } from 'react-redux'
 import LottieView from 'lottie-react-native'
 import MenuItem from '../components/restaurantShow/MenuItem'
@@ -37,16 +37,13 @@ export default function OrderCompleted() {
         limit(1)
       )
       const querySnapshot = await getDocs(q)
-      querySnapshot.forEach((doc) => {
-        console.log(doc.id, doc.data())
-      })
+      querySnapshot.forEach((doc) => {})
       querySnapshot.docs.map((doc) => {
         setLastOrder(doc.data().items)
       })
     }
     getLastOrder()
   }, [])
-  console.log(lastOrder)
 
   return (
     <SafeAreaView
@@ -55,37 +52,50 @@ export default function OrderCompleted() {
         backgroundColor: '#0c1527',
       }}
     >
-      <LottieView
+      <View
         style={{
-          height: 100,
-          alignSelf: 'center',
-          marginBottom: 30,
-        }}
-        source={require('../assets/animations/check-mark.json')}
-        autoPlay
-        speed={0.5}
-        loop={false}
-      />
-      <Text
-        style={{
-          color: '#eef6ff',
+          margin: 15,
+          alignItems: 'center',
+          height: '100%',
         }}
       >
-        Your order at {restaurantName} has been placed for {textTotal}
-      </Text>
-      {lastOrder.length > 0 ? (
-        <MenuItem foods={lastOrder} hideCheckbox={true} />
-      ) : null}
-      <LottieView
-        style={{
-          height: 200,
-          alignSelf: 'center',
-        }}
-        source={require('../assets/animations/cooking.json')}
-        autoPlay
-        speed={0.5}
-        loop={false}
-      />
+        <LottieView
+          style={{
+            height: 100,
+            alignSelf: 'center',
+            marginBottom: 30,
+          }}
+          source={require('../assets/animations/check-mark.json')}
+          autoPlay
+          speed={0.5}
+          loop={false}
+        />
+        <Text
+          style={{
+            color: '#eef6ff',
+            fontSize: 20,
+            fontWeight: 'bold',
+          }}
+        >
+          Your order at {restaurantName} has been placed for {textTotal}.
+        </Text>
+        <ScrollView>
+          {lastOrder.length > 0 ? (
+            <MenuItem foods={lastOrder} hideCheckbox={true} />
+          ) : null}
+        </ScrollView>
+
+        <LottieView
+          style={{
+            height: 200,
+            alignSelf: 'center',
+          }}
+          source={require('../assets/animations/cooking.json')}
+          autoPlay
+          speed={0.5}
+          loop={false}
+        />
+      </View>
     </SafeAreaView>
   )
 }

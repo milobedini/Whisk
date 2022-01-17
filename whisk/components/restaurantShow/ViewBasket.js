@@ -11,10 +11,12 @@ import { useSelector } from 'react-redux'
 import { db } from '../../firebase'
 import OrderItem from './OrderItem'
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
+import LottieView from 'lottie-react-native'
 
 export default function ViewBasket({ route, navigation }) {
   const [modalVisible, setModalVisible] = useState(false)
   const { image } = route.params
+  const [loading, setLoading] = useState(false)
 
   const { items, restaurantName } = useSelector(
     (state) => state.basketReducer.selectedItems
@@ -29,13 +31,19 @@ export default function ViewBasket({ route, navigation }) {
   })
 
   const addOrderToFirebase = () => {
+    setLoading(true)
+    setModalVisible(true)
     const docRef = addDoc(collection(db, 'orders'), {
       items: items,
       restaurantName: restaurantName,
       created: serverTimestamp(),
-    })
-    setModalVisible(false)
-    navigation.navigate('OrderCompleted')
+    }).then(() =>
+      setTimeout(() => {
+        setLoading(false)
+        setModalVisible(false)
+        navigation.navigate('OrderCompleted')
+      }, 2500)
+    )
   }
 
   const styles = StyleSheet.create({
@@ -198,6 +206,28 @@ export default function ViewBasket({ route, navigation }) {
               </Text>
             </TouchableOpacity>
           </View>
+        </View>
+      ) : null}
+      {loading ? (
+        <View
+          style={{
+            backgroundColor: '#0c1527',
+            position: 'absolute',
+            opacity: 0.6,
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100%',
+            width: '100%',
+          }}
+        >
+          <LottieView
+            style={{
+              height: 200,
+            }}
+            source={require('../../assets/animations/scanner.json')}
+            autoPlay
+            speed={3}
+          ></LottieView>
         </View>
       ) : null}
     </>
