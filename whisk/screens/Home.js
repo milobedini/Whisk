@@ -55,7 +55,7 @@ export default function Home({ navigation }) {
         />
       </ScrollView>
       <Divider width={1} />
-      <FooterTabs />
+      <FooterTabs navigation={navigation} />
     </SafeAreaView>
   )
 }

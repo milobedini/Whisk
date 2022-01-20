@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { FontAwesome5 } from 'react-native-vector-icons'
 
-export default function FooterTabs() {
+export default function FooterTabs({ navigation }) {
   return (
     <View
       style={{
@@ -16,13 +16,15 @@ export default function FooterTabs() {
       <Icon icon="search" name="Browse" />
       <Icon icon="shopping-bag" name="Bag" />
       <Icon icon="receipt" name="Orders" />
-      <Icon icon="user" name="Account" />
+      <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+        <Icon icon="user" name="Account" />
+      </TouchableOpacity>
     </View>
   )
 }
 
 const Icon = ({ icon, name }) => (
-  <TouchableOpacity>
+  <View>
     <FontAwesome5
       name={icon}
       size={25}
@@ -39,5 +41,5 @@ const Icon = ({ icon, name }) => (
     >
       {name}
     </Text>
-  </TouchableOpacity>
+  </View>
 )
