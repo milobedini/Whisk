@@ -8,8 +8,18 @@ import axios from 'axios'
 import { YELP_API_KEY } from '../Environment'
 import { Divider } from 'react-native-elements'
 import FooterTabs from '../components/home/FooterTabs'
+import { auth } from '../firebase'
 
 export default function Home({ navigation }) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  useEffect(() => {
+    console.log(isLoggedIn)
+    if (auth.currentUser) {
+      setIsLoggedIn(true)
+    } else setIsLoggedIn(false)
+  }, [isLoggedIn])
+
   const [restaurantData, setRestaurantData] = useState([])
   const [city, setCity] = useState('London')
   const [activeTab, setActiveTab] = useState('All')
@@ -40,10 +50,18 @@ export default function Home({ navigation }) {
     getYelpRestaurants()
   }, [city, activeTab])
 
+  useEffect(() => {
+    console.log(isLoggedIn)
+  }, [isLoggedIn])
+
   return (
     <SafeAreaView style={{ backgroundColor: '#0c1527', flex: 1 }}>
       <View style={{ backgroundColor: '#eef6ff', padding: 16 }}>
-        <HeaderTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+        <HeaderTabs
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          setIsLoggedIn={setIsLoggedIn}
+        />
         <SearchBar setCity={setCity} />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -55,7 +73,11 @@ export default function Home({ navigation }) {
         />
       </ScrollView>
       <Divider width={1} />
-      <FooterTabs navigation={navigation} />
+      <FooterTabs
+        navigation={navigation}
+        isLoggedIn={isLoggedIn}
+        setIsLoggedIn={setIsLoggedIn}
+      />
     </SafeAreaView>
   )
 }

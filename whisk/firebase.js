@@ -30,7 +30,7 @@ const signUp = (email, password) => {
 }
 
 const logOut = () => {
-  signOut(auth)
+  return signOut(auth)
 }
 
 export { db, auth, signIn, signUp, logOut }

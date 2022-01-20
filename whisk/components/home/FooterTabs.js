@@ -1,8 +1,15 @@
-import React from 'react'
+import { signOut } from 'firebase/auth'
+import React, { useEffect, useState } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { FontAwesome5 } from 'react-native-vector-icons'
+import { auth, logOut } from '../../firebase'
 
-export default function FooterTabs({ navigation }) {
+export default function FooterTabs({ navigation, setIsLoggedIn, isLoggedIn }) {
+  const handleLogout = async () => {
+    await logOut()
+    setIsLoggedIn(false)
+  }
+
   return (
     <View
       style={{
@@ -16,8 +23,12 @@ export default function FooterTabs({ navigation }) {
       <Icon icon="search" name="Browse" />
       <Icon icon="shopping-bag" name="Bag" />
       <Icon icon="receipt" name="Orders" />
-      <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
-        <Icon icon="user" name="Account" />
+      <TouchableOpacity
+        onPress={
+          auth.currentUser ? handleLogout : () => navigation.navigate('SignIn')
+        }
+      >
+        <Icon icon="user" name={isLoggedIn ? 'Sign Out' : 'Sign In'} />
       </TouchableOpacity>
     </View>
   )

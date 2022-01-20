@@ -1,26 +1,29 @@
-import { View, Text, TextInput } from 'react-native'
-import React, { useState } from 'react'
-import { signIn, signUp } from '../firebase'
+import { View, Text, TextInput, Button, TouchableOpacity } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { auth, signIn, signUp } from '../firebase'
 import LottieView from 'lottie-react-native'
 
-const SignIn = () => {
+const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [mode, setMode] = useState('signUp')
+  const [mode, setMode] = useState('signIn')
 
   const handlePress = async () => {
     if (mode === 'signUp') {
       await signUp(email, password)
+      setMode('signIn')
     }
     if (mode === 'signIn') {
       await signIn(email, password)
+
+      navigation.navigate('Home')
     }
   }
 
   return (
     <View
       style={{
-        justifyContent: 'center',
+        // justifyContent: 'center',
         alignItems: 'center',
         flex: 1,
         backgroundColor: '#0c1527',
@@ -48,8 +51,9 @@ const SignIn = () => {
           style={{
             borderBottomColor: '#18cdba',
             borderBottomWidth: 2,
-            width: 200,
             color: '#18cdba',
+            fontSize: 24,
+            width: 300,
           }}
         />
         <TextInput
@@ -61,11 +65,31 @@ const SignIn = () => {
           style={{
             borderBottomColor: '#18cdba',
             borderBottomWidth: 2,
-            width: 200,
             color: '#18cdba',
             marginTop: 20,
+            fontSize: 24,
           }}
         />
+        <View style={{ marginTop: 20 }}>
+          <Button
+            title={mode === 'signUp' ? 'Sign Up' : 'Log In'}
+            disabled={!password || !email}
+            color="#18cdba"
+            onPress={() => handlePress()}
+          />
+          <TouchableOpacity
+            style={{ marginTop: 15 }}
+            onPress={() =>
+              mode === 'signUp' ? setMode('signIn') : setMode('signUp')
+            }
+          >
+            <Text style={{ color: '#eef6ff', textAlign: 'center' }}>
+              {mode === 'signUp'
+                ? 'Already have an account? Sign In.'
+                : "Don't have an account? Sign Up."}
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   )

@@ -1,5 +1,6 @@
 let defaultState = {
   selectedItems: { items: [], restaurantName: '' },
+  user: null,
 }
 
 let basketReducer = (state = defaultState, action) => {
@@ -30,6 +31,8 @@ let basketReducer = (state = defaultState, action) => {
       console.log('Basket emptied')
       return defaultState
     }
+    case 'SET_USER':
+      return { ...state, user: action.user }
     default:
       return state
   }
